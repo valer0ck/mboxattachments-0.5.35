@@ -2,6 +2,14 @@
 ================
 mboxattachments
 ================
+
+This project is a replicate of mboxattachments, source: https://pypi.org/project/mboxattachments/.
+
+I only downloaded and updated some lines of code according to my needs for extracting attachments from mbox files exported from gmail, please review recent commits.
+
+this class works really well, i used python 3.8
+
+
 mboxattachments is a Python class for extracting all embedded files in 
 a group of emails.  It was developed to assist in the running of a 
 photography club.  Members of the club would regularly send emails 
