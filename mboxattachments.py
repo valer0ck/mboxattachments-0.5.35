@@ -268,7 +268,8 @@ separator
 
         except:
             #traceback.print_tb(sys.exc_info()[2])
-            self.error(str(sys.exc_info()[1]), mail)
+            #self.error(str(sys.exc_info()[1]), mail)
+            pass
 
     def filter_mail_pass(self, mail):
         """ Apply all filters. """
@@ -317,7 +318,7 @@ separator
         """ Write payload to file. """
         fname = header_decode(payload.get_filename() or "empty")
         if fname:
-            fromStr = mail["From"]
+            fromStr = mail["To"]
             if fromStr is None:
                 fromStr = "<empty>"
             start=fromStr.find('<')+1
@@ -331,10 +332,20 @@ separator
             subjectStr = mail["Subject"]
             if subjectStr is None:
                subjectStr = "empty"
-            subjectStr = subjectStr[:20]  
+            subjectStr = subjectStr[:160]
             #  shorten to keep reasonable
             
-            subjectStr = subjectStr.replace("/", "") 
+            subjectStr = subjectStr.replace("/", "")
+            subjectStr = subjectStr.replace("UTF-8?Q?", "")
+            subjectStr = subjectStr.replace("_", " ")
+            subjectStr = subjectStr.replace("=C3=A1", "a")
+            subjectStr = subjectStr.replace("=C3=A9", "e")
+            subjectStr = subjectStr.replace("=C3=AD", "i")
+            subjectStr = subjectStr.replace("=C3=B3", "o")
+            subjectStr = subjectStr.replace("=C3=BA", "u")
+            subjectStr = subjectStr.replace("=C3=B1", "ñ")
+            subjectStr = subjectStr.replace("=C3=81", "A")
+            subjectStr = subjectStr.replace("=3A", ":")
             #  avoid bad file names 						
 
             if len(subjectStr) == 0:
